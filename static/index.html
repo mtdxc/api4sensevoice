@@ -64,8 +64,8 @@
             queryParams.push('sv=1');
         }
         var queryString = queryParams.length > 0 ? `?${queryParams.join('&')}` : '';
-
-        ws = new WebSocket(`wss://your_wss_server_address/ws/transcribe${queryString}`);
+        var wsProtocol = window.location.protocol === "https:" ? "wss://" : "ws://";
+        ws = new WebSocket(`${wsProtocol}${window.location.host}/ws/transcribe${queryString}`);
         ws.binaryType = 'arraybuffer';
 
         ws.onopen = function(event) {
